@@ -4,25 +4,25 @@ FROM quay.io/wuthenow/dm-demo
 
 
 # #Arguments
-# ARG PAM_VERSION
-# ARG DM_DECISION_CENTRAL
+# ARG PAM_VERSION="7.10.0"
+# ARG DM_DECISION_CENTRAL=""
 # ARG DM_KIE_SERVER
 # ARG EAP
 # ARG PROJECT_GIT_REPO
 # ARG NIOGIT_PROJECT_GIT_REPO
 # ARG JBOSS_EAP
-# #ARG EAP_PATCH
+# ARG EAP_PATCH
 
 # # Environment Variables
-# ENV HOME /opt/jboss
-# ENV JBOSS_HOME $HOME/$JBOSS_EAP
+ENV HOME /opt/jboss
+ENV JBOSS_HOME ./target/jboss-eap-7.3
 
 # # ADD Installation Files
 # COPY installs/$DM_DECISION_CENTRAL installs/$DM_KIE_SERVER installs/$EAP /opt/jboss/
 
 # # Update Permissions on Installers
 # USER root
-# RUN chown jboss:jboss /opt/jboss/$EAP /opt/jboss/$DM_DECISION_CENTRAL /opt/jboss/$DM_KIE_SERVER
+# RUN chown jboss:jboss /opt/jboss/$EAP /opt/jboss/$DM_DECISION_CENTRAL /#opt/jboss/$DM_KIE_SERVER
 # USER jboss
 
 # # Prepare and run installer and cleanup installation components
@@ -32,16 +32,16 @@ FROM quay.io/wuthenow/dm-demo
 #     rm -rf /opt/jboss/$DM_DECISION_CENTRAL /opt/jboss/$DM_KIE_SERVER /opt/jboss/$EAP $JBOSS_HOME/standalone/configuration/standalone_xml_history/
 
 # # Add support files
-# RUN $JBOSS_HOME/bin/add-user.sh -a -r ApplicationRealm -u dmAdmin -p redhatdm1! -ro analyst,admin,manager,user,kie-server,kiemgmt,rest-all --silent  && \
-#   $JBOSS_HOME/bin/add-user.sh -a -r ApplicationRealm -u kieserver -p kieserver1! -ro kie-server,rest-all --silent
-# COPY support/standalone-full.xml $JBOSS_HOME/standalone/configuration/
-# COPY support/userinfo.properties $JBOSS_HOME/standalone/deployments/decision-central.war/WEB-INF/classes/
+ RUN $JBOSS_HOME/bin/add-user.sh -a -r ApplicationRealm -u dmAdmin -p redhatdm1! -ro analyst,admin,manager,user,kie-server,kiemgmt,rest-all --silent  && \
+   $JBOSS_HOME/bin/add-user.sh -a -r ApplicationRealm -u kieserver -p kieserver1! -ro kie-server,rest-all --silent
+ COPY support/standalone-full.xml $JBOSS_HOME/standalone/configuration/
+ COPY support/userinfo.properties $JBOSS_HOME/standalone/deployments/decision-central.war/WEB-INF/classes/
 
 # # Swtich back to root user to perform cleanup
-# USER root
+ USER root
 
 # # Fix permissions on support files
-# RUN chown -R jboss:jboss $JBOSS_HOME/standalone/configuration/standalone-full.xml $JBOSS_HOME/standalone/deployments/decision-central.war/WEB-INF/classes/userinfo.properties
+ RUN chown -R jboss:jboss $JBOSS_HOME/standalone/configuration/standalone-full.xml $JBOSS_HOME/standalone/deployments/decision-central.war/WEB-INF/classes/userinfo.properties
 
 # Run as JBoss
 USER jboss
