@@ -1,5 +1,5 @@
 # Use jbossdemocentral/developer as the base
-FROM quay.io/wuthenow/dm-demo
+FROM quay.io/wuthenow/dm-dev
 
 
 
