@@ -45,7 +45,7 @@ ENV JBOSS_HOME /opt/jboss/jboss-eap-7.3
 
 
 RUN chown -R jboss:jboss $JBOSS_HOME
-RUN chmod -R 777 jboss:jboss $JBOSS_HOME
+RUN chmod -R 777  $JBOSS_HOME
 
 # Run as JBoss
 USER jboss
