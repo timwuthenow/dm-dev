@@ -55,4 +55,4 @@ EXPOSE 9990 9999 8080
 
 # Run BRMS
 ENTRYPOINT ["/opt/jboss/jboss-eap-7.3/bin/standalone.sh"]
-CMD ["-c","standalone-full.xml","-b", "0.0.0.0","-bmanagement","0.0.0.0", "-DJAVA_OPTS_APPEND=-Xmx8096M"]
+CMD ["-c","standalone-full.xml","-b", "0.0.0.0","-bmanagement","0.0.0.0"]
