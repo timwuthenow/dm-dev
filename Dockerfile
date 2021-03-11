@@ -15,7 +15,7 @@ FROM quay.io/wuthenow/dm-dev
 
 # # Environment Variables
 ENV HOME /opt/jboss
-ENV JBOSS_HOME ./target/jboss-eap-7.3
+ENV JBOSS_HOME /opt/jboss/jboss-eap-7.3
 
 # # ADD Installation Files
 # COPY installs/$DM_DECISION_CENTRAL installs/$DM_KIE_SERVER installs/$EAP /opt/jboss/
