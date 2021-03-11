@@ -43,7 +43,9 @@ ENV JBOSS_HOME /opt/jboss/jboss-eap-7.3
 # # Fix permissions on support files
  RUN chown -R jboss:jboss $JBOSS_HOME/standalone/configuration/standalone-full.xml   $JBOSS_HOME/standalone/deployments/decision-central.war/WEB-INF/classes/userinfo.properties
 
+
 RUN chown -R jboss:jboss $JBOSS_HOME
+RUN chmod -R 777 jboss:jboss $JBOSS_HOME
 
 # Run as JBoss
 USER jboss
