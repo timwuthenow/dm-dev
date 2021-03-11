@@ -21,9 +21,9 @@ ENV JBOSS_HOME /opt/jboss/jboss-eap-7.3
 # COPY installs/$DM_DECISION_CENTRAL installs/$DM_KIE_SERVER installs/$EAP /opt/jboss/
 
 # # Update Permissions on Installers
-# USER root
-# RUN chown jboss:jboss /opt/jboss/$EAP /opt/jboss/$DM_DECISION_CENTRAL /#opt/jboss/$DM_KIE_SERVER
-# USER jboss
+ USER root
+ RUN chown jboss:jboss /opt/jboss/$EAP /opt/jboss/$DM_DECISION_CENTRAL /opt/jboss/$DM_KIE_SERVER
+ USER jboss
 
 # # Prepare and run installer and cleanup installation components
 # RUN unzip -qo /opt/jboss/$EAP -d $HOME && \
@@ -41,8 +41,7 @@ ENV JBOSS_HOME /opt/jboss/jboss-eap-7.3
  USER root
 
 # # Fix permissions on support files
- RUN chown -R jboss:jboss $JBOSS_HOME/standalone/configuration/standalone-full.xml 
-#  $JBOSS_HOME/standalone/deployments/decision-central.war/WEB-INF/classes/userinfo.properties
+ RUN chown -R jboss:jboss $JBOSS_HOME/standalone/configuration/standalone-full.xml   $JBOSS_HOME/standalone/deployments/decision-central.war/WEB-INF/classes/userinfo.properties
 
 RUN chown -R jboss:jboss $JBOSS_HOME
 
